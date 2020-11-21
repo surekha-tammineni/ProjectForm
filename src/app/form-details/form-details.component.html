@@ -1,0 +1,78 @@
+<div fxFlex="100">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end">
+        <mat-card-actions>
+            <button (click)="openDialog()" color="primary" mat-raised-button>
+                + Create Form</button>
+        </mat-card-actions>
+    </div>
+    <mat-card>
+        <mat-card-header fxLayoutAlign="space-between center">
+            <mat-card-title>
+                <h3>Form Details</h3>
+            </mat-card-title>
+
+        </mat-card-header>
+        <div fxLayout="row" fxLayoutAlign="end">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+            </mat-form-field>
+        </div>
+
+        <mat-card-content>
+            <div>
+                <mat-table #ft="matSort" [dataSource]="arrData" matSort>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+                    <ng-container matColumnDef="sno">
+                        <mat-header-cell *matHeaderCellDef> SN. </mat-header-cell>
+                        <mat-cell *matCellDef="let element; let i = index;"> {{i+1}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="firstName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="lastName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="userName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> User Name </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.userName}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="email">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="gender">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.gender}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="phoneNo">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Phone No </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.phoneNo}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                        <mat-cell *matCellDef="let data;let i=index">
+                            <button mat-button color="primary" matTooltip="Update form" [matTooltipPosition]="'above'"
+                                (click)="indexvalue(i)" (click)="editDetails(data)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+                </mat-table>
+            </div>
+            <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                (page)="getPaginatorData($event)" showFirstLastButtons>
+            </mat-paginator>
+        </mat-card-content>
+    </mat-card>
+</div>
